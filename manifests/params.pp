@@ -22,6 +22,16 @@ class salt::params {
       $master_service_manage = true
       $master_service_enable = true
 
+      $api_config_manage = true
+      $api_config = '/etc/salt/api'
+      $api_config_template = 'salt/api.erb'
+      $api_package_name = 'salt-api'
+      $api_package_ensure = 'present'
+      $api_service_name = 'salt-api'
+      $api_service_ensure = 'running'
+      $api_config_enable_cherrypy = true
+      $api_config_enable_tornado = false
+      $api_config_enable_wsgi = false
     }
     'archlinux' : {
       $minion_config_manage = true
@@ -43,6 +53,17 @@ class salt::params {
       $master_service_ensure = 'running'
       $master_service_manage = true
       $master_service_enable = true
+
+      $api_config_manage = true
+      $api_config = '/etc/salt/api'
+      $api_config_template = 'salt/api.erb'
+      $api_package_name = 'salt-api'
+      $api_package_ensure = 'present'
+      $api_service_name = 'salt-api'
+      $api_service_ensure = 'running'
+      $api_config_enable_cherrypy = true
+      $api_config_enable_tornado = false
+      $api_config_enable_wsgi = false
     }
     'suse'      : {
       $minion_config_manage = true
@@ -64,6 +85,17 @@ class salt::params {
       $master_service_ensure = 'running'
       $master_service_manage = true
       $master_service_enable = true
+
+      $api_config_manage = true
+      $api_config = '/etc/salt/api'
+      $api_config_template = 'salt/api.erb'
+      $api_package_name = 'salt-api'
+      $api_package_ensure = 'present'
+      $api_service_name = 'salt-api'
+      $api_service_ensure = 'running'
+      $api_config_enable_cherrypy = true
+      $api_config_enable_tornado = false
+      $api_config_enable_wsgi = false
     }
     'debian'    : {
       $minion_config_manage = true
@@ -85,6 +117,17 @@ class salt::params {
       $master_service_ensure = 'running'
       $master_service_manage = true
       $master_service_enable = true
+
+      $api_config_manage = true
+      $api_config = '/etc/salt/api'
+      $api_config_template = 'salt/api.erb'
+      $api_package_name = 'salt-api'
+      $api_package_ensure = 'present'
+      $api_service_name = 'salt-api'
+      $api_service_ensure = 'running'
+      $api_config_enable_cherrypy = true
+      $api_config_enable_tornado = false
+      $api_config_enable_wsgi = false
     }
     default     : {
       case $::operatingsystem {
@@ -243,4 +286,33 @@ class salt::params {
   $minion_tcp_keepalive_cnt = '-1'
   $minion_tcp_keepalive_intvl = '-1'
 
+
+  ###############################################
+  # api defaults
+  ###############################################
+  $api_cherrypy_port                  = 8000
+  $api_cherrypy_host                  = '0.0.0.0'
+  $api_cherrypy_debug                 = false
+  $api_cherrypy_ssl_crt               = '/etc/pki/api/certs/server.crt'
+  $api_cherrypy_ssl_key               = '/etc/pki/api/certs/server.key'
+  $api_cherrypy_disable_ssl           = false
+  $api_cherrypy_webhook_disable_auth  = false
+  $api_cherrypy_webhook_url           = '/hook'
+  $api_cherrypy_thread_pool           = 100
+  $api_cherrypy_socket_queue_size     = 30
+  $api_cherrypy_max_request_body_size = 1048576
+  $api_cherrypy_collect_stats         = false
+  $api_cherrypy_static                = 'static'
+  $api_cherrypy_static_path           = '/static'
+  $api_cherrypy_app                   = 'app'
+  $api_cherrypy_app_path              = '/app'
+  $api_cherrypy_root_prefix           = '/'
+
+  $api_tornado_port                   = 8001
+  $api_tornado_ssl_crt                = '/etc/pki/api/certs/server.crt'
+  $api_tornado_ssl_key                = '/etc/pki/api/certs/server.key'
+  $api_tornado_debug                  = false
+  $api_tornado_disable_ssl            = false
+
+  $api_wsgi_port                      = 8002
 }
