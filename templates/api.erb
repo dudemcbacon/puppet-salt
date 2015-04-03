@@ -1,0 +1,28 @@
+rest_cherrypy:
+  port: <%= @api_cherrypy_port %>
+  host: <%= @api_cherrypy_host %>
+  debug: <%= @api_cherrypy_debug %>
+  ssl_crt: <%= @api_cherrypy_ssl_crt %>
+  ssl_key: <%= @api_cherrypy_ssl_key %>
+  disable_ssl: <%= @api_cherrypy_disable_ssl %>
+  webhook_disable_auth: <%= @api_cherrypy_webhook_disable_auth %>
+  webhook_url: <%= @api_cherrypy_webhook_url %>
+  thread_pool: <%= @api_cherrypy_thread_pool %>
+  socket_queue_size: <%= @api_cherrypy_socket_queue_size %>
+  max_request_body_size: <%= @api_cherrypy_max_request_body_size %>
+  collect_stats: <%= @api_cherrypy_collect_stats %>
+  static: <%= @api_cherrypy_static %>
+  static_path: <%= @api_cherrypy_static_path %>
+  app: <%= @api_cherrypy_app %>
+  app_path: <%= @api_cherrypy_app_path %>
+  root_prefix: <%= @api_cherrypy_root_prefix %>
+
+rest_tornado:
+  port: <%= @api_tornado_port %>
+  ssl_crt: <%= @api_tornado_ssl_crt %>
+  ssl_key: <%= @api_tornado_ssl_key %>
+  debug: <%= @api_tornado_debug %>
+  disable_ssl: <%= @api_tornado_disable_ssl %>
+
+rest_wsgi:
+  port: <%= @api_wsgi_port %>
