@@ -59,16 +59,28 @@ class salt::master::config (
   $master_log_file              = $salt::master::master_log_file,
   $master_key_logfile           = $salt::master::master_key_logfile,
   $master_log_level             = $salt::master::master_log_level,
-  $master_log_level_logfile     = $salt::master::master_log_level_logfile,)
-inherits salt::master {
+  $master_log_level_logfile     = $salt::master::master_log_level_logfile,
+  # api settings
+  $api_enable_cherrypy          = $salt::params::api_enable_cherrypy,
+  $api_enable_tornado           = $salt::params::api_enable_tornado,
+  $api_enable_wsgi              = $salt::params::api_enable_wsgi,
+) inherits salt::master {
   # installs the master config file defined in salt::params
-  file { $master_config:
-    ensure  => file,
-    owner   => 0,
-    group   => 0,
-    mode    => '0664',
-    content => template($master_template),
-    replace => $master_config_manage,
+  if $api_enable_cherrypy or $api_enable_tornado or $api_enable_wsgi {
+    concat::fragment { 'master':
+      target  => $master_config,
+      content => template($master_template),
+      order   => '01'
+    }
+  } else {
+    file { $master_config:
+      ensure  => file,
+      owner   => 0,
+      group   => 0,
+      mode    => '0664',
+      content => template($master_template),
+      replace => $master_config_manage,
+    }
   }
 
   # todo template the yaml parts in config file

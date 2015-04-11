@@ -1,3 +1,4 @@
+<% if @api_enable_cherrypy %>
 rest_cherrypy:
   port: <%= @api_cherrypy_port %>
   host: <%= @api_cherrypy_host %>
@@ -16,13 +17,18 @@ rest_cherrypy:
   app: <%= @api_cherrypy_app %>
   app_path: <%= @api_cherrypy_app_path %>
   root_prefix: <%= @api_cherrypy_root_prefix %>
+<% end %>
 
+<% if @api_enable_tornado %>
 rest_tornado:
   port: <%= @api_tornado_port %>
   ssl_crt: <%= @api_tornado_ssl_crt %>
   ssl_key: <%= @api_tornado_ssl_key %>
   debug: <%= @api_tornado_debug %>
   disable_ssl: <%= @api_tornado_disable_ssl %>
+<% end %>
 
+<% if @api_enable_wsgi %>
 rest_wsgi:
   port: <%= @api_wsgi_port %>
+<% end %>

@@ -9,3 +9,4 @@ description 'Module to manage a salt installation server/client'
 
 ## Add dependencies, if any:
 dependency 'puppetlabs/stdlib', '>= 2.2.1'
+dependency 'puppetlabs/concat', '>= 1.2.0'

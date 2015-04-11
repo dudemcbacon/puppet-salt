@@ -4,7 +4,7 @@ class salt::api::service (
   $api_service_name   = $salt::api::api_service_name,
   $api_service_ensure = $salt::api::api_service_ensure,
   $api_service_manage = $salt::api::api_service_manage,
-  $api_service_enable = $salt::api::api_service_enable,) 
+  $api_service_enable = $salt::api::api_service_enable,)
 inherits salt::api {
   # test for wrong variable
   if !($api_service_ensure in ['running', 'stopped']) {

@@ -23,15 +23,14 @@ class salt::params {
       $master_service_enable = true
 
       $api_config_manage = true
-      $api_config = '/etc/salt/api'
       $api_config_template = 'salt/api.erb'
-      $api_package_name = 'salt-api'
+      $api_enable_cherrypy = true
+      $api_enable_tornado = false
+      $api_enable_wsgi = false
       $api_package_ensure = 'present'
-      $api_service_name = 'salt-api'
+      $api_package_name = 'salt-api'
       $api_service_ensure = 'running'
-      $api_config_enable_cherrypy = true
-      $api_config_enable_tornado = false
-      $api_config_enable_wsgi = false
+      $api_service_name = 'salt-api'
     }
     'archlinux' : {
       $minion_config_manage = true
