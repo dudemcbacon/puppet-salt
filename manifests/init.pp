@@ -3,6 +3,8 @@
 #   include salt
 #
 class salt {
+  class { 'salt::params': }
   include 'salt::master'
   include 'salt::minion'
+  include 'salt::api'
 }

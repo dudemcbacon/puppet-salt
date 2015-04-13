@@ -1,141 +1,53 @@
-# This class will set all parameters for salt master/minion
+# This class will set all parameters for salt master/minion/api
 class salt::params {
   case $::osfamily {
-    'redhat'    : {
-      $minion_config_manage = true
-      $minion_config = '/etc/salt/minion'
-      $minion_config_template = 'salt/minion.erb'
-      $minion_package_name = 'salt-minion'
-      $minion_package_ensure = 'present'
-      $minion_service_name = 'salt-minion'
-      $minion_service_ensure = 'running'
-      $minion_service_manage = true
-      $minion_service_enable = true
-
-      $master_config_manage = true
-      $master_config = '/etc/salt/master'
-      $master_config_template = 'salt/master.erb'
-      $master_package_name = 'salt-master'
-      $master_package_ensure = 'present'
-      $master_service_name = 'salt-master'
-      $master_service_ensure = 'running'
-      $master_service_manage = true
-      $master_service_enable = true
-
-      $api_config_manage = true
-      $api_config_template = 'salt/api.erb'
-      $api_enable_cherrypy = true
-      $api_enable_tornado = false
-      $api_enable_wsgi = false
-      $api_package_ensure = 'present'
-      $api_package_name = 'salt-api'
-      $api_service_ensure = 'running'
-      $api_service_name = 'salt-api'
-    }
-    'archlinux' : {
-      $minion_config_manage = true
-      $minion_config = '/etc/salt/minion'
-      $minion_config_template = 'salt/minion.erb'
+    'ArchLinux': {
       $minion_package_name = 'salt'
-      $minion_package_ensure = 'present'
-      $minion_service_name = 'salt-minion'
-      $minion_service_ensure = 'running'
-      $minion_service_manage = true
-      $minion_service_enable = true
-
-      $master_config_manage = true
-      $master_config = '/etc/salt/master'
-      $master_config_template = 'salt/master.erb'
       $master_package_name = 'salt'
-      $master_package_ensure = 'present'
-      $master_service_name = 'salt-master'
-      $master_service_ensure = 'running'
-      $master_service_manage = true
-      $master_service_enable = true
-
-      $api_config_manage = true
-      $api_config = '/etc/salt/api'
-      $api_config_template = 'salt/api.erb'
-      $api_package_name = 'salt-api'
-      $api_package_ensure = 'present'
-      $api_service_name = 'salt-api'
-      $api_service_ensure = 'running'
-      $api_config_enable_cherrypy = true
-      $api_config_enable_tornado = false
-      $api_config_enable_wsgi = false
     }
-    'suse'      : {
-      $minion_config_manage = true
-      $minion_config = '/etc/salt/minion'
-      $minion_config_template = 'salt/minion.erb'
+    default: {
       $minion_package_name = 'salt-minion'
-      $minion_package_ensure = 'present'
-      $minion_service_name = 'salt-minion'
-      $minion_service_ensure = 'running'
-      $minion_service_manage = true
-      $minion_service_enable = true
-
-      $master_config_manage = true
-      $master_config = '/etc/salt/master'
-      $master_config_template = 'salt/master.erb'
       $master_package_name = 'salt-master'
-      $master_package_ensure = 'present'
-      $master_service_name = 'salt-master'
-      $master_service_ensure = 'running'
-      $master_service_manage = true
-      $master_service_enable = true
-
-      $api_config_manage = true
-      $api_config = '/etc/salt/api'
-      $api_config_template = 'salt/api.erb'
-      $api_package_name = 'salt-api'
-      $api_package_ensure = 'present'
-      $api_service_name = 'salt-api'
-      $api_service_ensure = 'running'
-      $api_config_enable_cherrypy = true
-      $api_config_enable_tornado = false
-      $api_config_enable_wsgi = false
-    }
-    'debian'    : {
-      $minion_config_manage = true
-      $minion_config = '/etc/salt/minion'
-      $minion_config_template = 'salt/minion.erb'
-      $minion_package_name = 'salt-minion'
-      $minion_package_ensure = 'present'
-      $minion_service_name = 'salt-minion'
-      $minion_service_ensure = 'running'
-      $minion_service_manage = true
-      $minion_service_enable = true
-
-      $master_config_manage = true
-      $master_config = '/etc/salt/master'
-      $master_config_template = 'salt/master.erb'
-      $master_package_name = 'salt-master'
-      $master_package_ensure = 'present'
-      $master_service_name = 'salt-master'
-      $master_service_ensure = 'running'
-      $master_service_manage = true
-      $master_service_enable = true
-
-      $api_config_manage = true
-      $api_config = '/etc/salt/api'
-      $api_config_template = 'salt/api.erb'
-      $api_package_name = 'salt-api'
-      $api_package_ensure = 'present'
-      $api_service_name = 'salt-api'
-      $api_service_ensure = 'running'
-      $api_config_enable_cherrypy = true
-      $api_config_enable_tornado = false
-      $api_config_enable_wsgi = false
-    }
-    default     : {
-      case $::operatingsystem {
-        default : {
-          fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
-        }
-      }
     }
   }
+
+  unless $::osfamily =~ /^(ArchLinux|CentOS|Debian|RedHat|SUSE)$/ {
+    fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
+  }
+
+  ###############################################
+  # service defaults:
+  ###############################################
+  $minion_config_manage = true
+  $minion_config = '/etc/salt/minion'
+  $minion_config_template = 'salt/minion.erb'
+  $minion_package_ensure = 'present'
+  $minion_service_name = 'salt-minion'
+  $minion_service_ensure = 'running'
+  $minion_service_manage = true
+  $minion_service_enable = true
+
+  $master_config_manage = true
+  $master_config = '/etc/salt/master'
+  $master_config_template = 'salt/master.erb'
+  $master_package_ensure = 'present'
+  $master_service_name = 'salt-master'
+  $master_service_ensure = 'running'
+  $master_service_manage = true
+  $master_service_enable = true
+
+  $api_config_manage = true
+  $api_config_template = 'salt/api.erb'
+  $api_enable_cherrypy = false
+  $api_enable_tornado = false
+  $api_enable_wsgi = false
+  $api_package_ensure = 'present'
+  $api_package_name = 'salt-api'
+  $api_service_name = 'salt-api'
+  $api_service_ensure = 'running'
+  $api_service_manage = true
+  $api_service_enable = true
+
   ###############################################
   # master defaults:
   ###############################################

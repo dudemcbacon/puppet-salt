@@ -61,9 +61,9 @@ class salt::master::config (
   $master_log_level             = $salt::master::master_log_level,
   $master_log_level_logfile     = $salt::master::master_log_level_logfile,
   # api settings
-  $api_enable_cherrypy          = $salt::params::api_enable_cherrypy,
-  $api_enable_tornado           = $salt::params::api_enable_tornado,
-  $api_enable_wsgi              = $salt::params::api_enable_wsgi,
+  $api_enable_cherrypy          = $salt::master::api_enable_cherrypy,
+  $api_enable_tornado           = $salt::master::api_enable_tornado,
+  $api_enable_wsgi              = $salt::master::api_enable_wsgi,
 ) inherits salt::master {
   # installs the master config file defined in salt::params
   if $api_enable_cherrypy or $api_enable_tornado or $api_enable_wsgi {
