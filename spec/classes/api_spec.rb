@@ -27,7 +27,7 @@ describe 'salt::api', :type => 'class' do
           }
 
           it { should contain_concat('/etc/salt/master')
-            .with_content(/^rest_#{api}:$/)
+            .with_content(/^rest_#{api}:/)
           }
 
 

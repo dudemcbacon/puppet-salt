@@ -3,14 +3,19 @@
 # class { 'salt::api': }
 #
 class salt::api (
-  $api_config_manage   = $salt::params::api_config_manage,
-  $api_enable_cherrypy = $salt::params::api_enable_cherrypy,
-  $api_enable_tornado  = $salt::params::api_enable_tornado,
-  $api_enable_wsgi     = $salt::params::api_enable_wsgi,
-  $api_service_name    = $salt::params::api_service_name,
-  $api_service_ensure  = $salt::params::api_service_ensure,
-  $api_service_manage  = $salt::params::api_service_manage,
-  $api_service_enable  = $salt::params::api_service_enable,
+  $api_config_manage    = $::salt::params::api_config_manage,
+  $api_config_template  = $::salt::params::api_config_template,
+  $api_enable_cherrypy  = $::salt::params::api_enable_cherrypy,
+  $api_enable_tornado   = $::salt::params::api_enable_tornado,
+  $api_enable_wsgi      = $::salt::params::api_enable_wsgi,
+  $api_package_ensure   = $::salt::params::api_package_ensure,
+  $api_package_name     = $::salt::params::api_package_name,
+  $api_service_name     = $::salt::params::api_service_name,
+  $api_service_ensure   = $::salt::params::api_service_ensure,
+  $api_service_manage   = $::salt::params::api_service_manage,
+  $api_service_enable   = $::salt::params::api_service_enable,
+  $master_config        = $::salt::params::master_config,
+  $master_config_manage = $::salt::params::master_config_manage,
 ) inherits salt::params {
 
   include 'salt::api::install'

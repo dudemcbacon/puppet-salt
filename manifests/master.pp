@@ -77,6 +77,7 @@ class salt::master (
   include 'salt::master::install'
   include 'salt::master::config'
   include 'salt::master::service'
+  include 'salt::master::api'
 
   # Anchor this as per #8140 - this ensures that classes won't float off and
   # mess everything up.  You can read about this at:
@@ -85,7 +86,11 @@ class salt::master (
 
   anchor { 'salt::master::end': }
 
-  Anchor['salt::master::begin'] -> Class['::salt::master::install'] -> Class['::salt::master::config'
-    ] ~> Class['::salt::master::service'] -> Anchor['salt::master::end']
+  Anchor['salt::master::begin']
+    -> Class['::salt::master::install']
+      -> Class['::salt::master::config']
+        ~> Class['::salt::master::service']
+          -> Class['::salt::master::api']
+            -> Anchor['salt::master::end']
 
 }

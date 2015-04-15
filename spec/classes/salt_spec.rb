@@ -10,7 +10,7 @@ describe 'salt', :type => 'class' do
     end
 
     it 'should fail' do
-      expect { subject }.to raise_error(/Unsupported platform: Unsupported/)
+      expect { should compile }.to raise_error(/Unsupported platform: Unsupported/)
     end
   end
 
@@ -27,9 +27,6 @@ describe 'salt', :type => 'class' do
       it { should contain_class('salt::minion::install') }
       it { should contain_class('salt::minion::config') }
       it { should contain_class('salt::minion::service') }
-      it { should contain_class('salt::api::install') }
-      it { should contain_class('salt::api::config') }
-      it { should contain_class('salt::api::service') }
 
       describe 'with default params' do
         it { should contain_file('/etc/salt/master')}

@@ -10,22 +10,20 @@ class salt::api::service (
   $api_service_enable  = $salt::api::api_service_enable,
 ) inherits salt::api {
 
-  if $api_enable_cherrypy or $api_enable_tornado or $api_enable_wsgi {
-    # test for wrong variable
-    if !($api_service_ensure in ['running', 'stopped']) {
-      fail('service_ensure parameter must be running or stopped')
-    }
+  # test for wrong variable
+  if !($api_service_ensure in ['running', 'stopped']) {
+    fail('service_ensure parameter must be running or stopped')
+  }
 
-    # ensure service that is defined in salt::params is
-    # managed and in the the right state.
-    if $api_service_manage == true {
-      service { $api_service_name:
-        ensure     => $api_service_ensure,
-        enable     => $api_service_enable,
-        name       => $api_service_name,
-        hasstatus  => true,
-        hasrestart => true,
-      }
+  # ensure service that is defined in salt::params is
+  # managed and in the the right state.
+  if $api_service_manage == true {
+    service { $api_service_name:
+      ensure     => $api_service_ensure,
+      enable     => $api_service_enable,
+      name       => $api_service_name,
+      hasstatus  => true,
+      hasrestart => true,
     }
   }
 
